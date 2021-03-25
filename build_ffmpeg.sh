@@ -48,8 +48,7 @@ configure() (
   EXTRA_CFLAGS="-fno-tree-vectorize -D_WIN32_WINNT=0x0600 -DWINVER=0x0600"
   EXTRA_LDFLAGS=""
   PKG_CONFIG_PREFIX_DIR=""
-  if [ "${arch}" == "x86_64" ]; then
-    OPTIONS="--arch=x86_64 --target-os=mingw64 --enable-shared --disable-static --build-suffix=-lav --disable-muxers --disable-encoders --pkg-config=pkg-config"
+  OPTIONS="--arch=x86_64 --target-os=mingw64 --enable-shared --disable-static --build-suffix=-lav --disable-muxers --disable-encoders --pkg-config=pkg-config"
   sh configure ${OPTIONS}
 )
 
