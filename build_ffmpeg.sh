@@ -48,9 +48,6 @@ configure() (
   OPTIONS="
     --enable-shared                 \
     --disable-static                \
-    --enable-version3               \
-    --enable-w32threads             \
-    --disable-demuxer=matroska      \
     --disable-filters               \
     --enable-filter=scale,yadif,w3fdif \
     --disable-protocol=async,cache,concat,httpproxy,icecast,md5,subfile \
@@ -68,7 +65,6 @@ configure() (
     --disable-debug                 \
     --disable-doc                   \
     --disable-schannel              \
-    --enable-nonfree                \
     --build-suffix=-lav             \
     --arch=${arch}"
 
