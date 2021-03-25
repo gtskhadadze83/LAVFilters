@@ -44,27 +44,12 @@ clean() (
   make distclean > /dev/null 2>&1
 )
 
-configure() (
-  OPTIONS="
-    --enable-shared                 \
-    --disable-static                \
-    --enable-filter=scale,yadif,w3fdif \
-    --disable-muxers                \    
-    --disable-avdevice              \
-    --disable-postproc              \
-    --disable-swresample            \
-    --disable-encoders              \
-    --disable-devices               \
-    --disable-programs              \
-    --build-suffix=-lav             \
-    --arch=${arch}"
-
   EXTRA_CFLAGS="-fno-tree-vectorize -D_WIN32_WINNT=0x0600 -DWINVER=0x0600"
   EXTRA_LDFLAGS=""
   PKG_CONFIG_PREFIX_DIR=""
   if [ "${arch}" == "x86_64" ]; then
     export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:../thirdparty/64/lib/pkgconfig/"
-    OPTIONS="${OPTIONS} --enable-cross-compile --cross-prefix=${cross_prefix} --target-os=mingw64 --pkg-config=pkg-config --host=x86_64-w64-mingw32"
+    OPTIONS="--arch=x86_64 --enable-cross-compile --cross-prefix=${cross_prefix} --target-os=mingw64 --pkg-config=pkg-config --host=x86_64-w64-mingw32 --enable-shared --disable-static --build-suffix=-lav --disable-muxers --disable-encoders"
     EXTRA_CFLAGS="${EXTRA_CFLAGS} -I../thirdparty/64/include"
     EXTRA_LDFLAGS="${EXTRA_LDFLAGS} -L../thirdparty/64/lib"
     PKG_CONFIG_PREFIX_DIR="--define-variable=prefix=../thirdparty/64"
