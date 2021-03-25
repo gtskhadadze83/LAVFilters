@@ -48,23 +48,14 @@ configure() (
   OPTIONS="
     --enable-shared                 \
     --disable-static                \
-    --disable-filters               \
     --enable-filter=scale,yadif,w3fdif \
-    --disable-protocol=async,cache,concat,httpproxy,icecast,md5,subfile \
     --disable-muxers                \    
-    --disable-cuda                  \
-    --disable-cuda-llvm             \
-    --disable-cuvid                 \
-    --disable-nvenc                 \
     --disable-avdevice              \
     --disable-postproc              \
     --disable-swresample            \
     --disable-encoders              \
     --disable-devices               \
     --disable-programs              \
-    --disable-debug                 \
-    --disable-doc                   \
-    --disable-schannel              \
     --build-suffix=-lav             \
     --arch=${arch}"
 
