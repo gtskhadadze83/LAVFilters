@@ -45,20 +45,11 @@ clean() (
 )
 
 configure() (
-  EXTRA_CFLAGS="-fno-tree-vectorize"
+  EXTRA_CFLAGS="-fno-tree-vectorize -D_WIN32_WINNT=0x0600 -DWINVER=0x0600"
   EXTRA_LDFLAGS=""
   PKG_CONFIG_PREFIX_DIR=""
   if [ "${arch}" == "x86_64" ]; then
-    export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:../thirdparty/64/lib/pkgconfig/"
-    OPTIONS="--arch=x86_64 --target-os=mingw64 --enable-shared --disable-static --build-suffix=-lav --disable-muxers --disable-encoders"
-  else
-    export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:../thirdparty/32/lib/pkgconfig/"
-    OPTIONS="${OPTIONS} --cpu=i686"
-    EXTRA_CFLAGS="${EXTRA_CFLAGS} -I../thirdparty/32/include -mmmx -msse -msse2 -mfpmath=sse -mstackrealign"
-    EXTRA_LDFLAGS="${EXTRA_LDFLAGS} -L../thirdparty/32/lib"
-    PKG_CONFIG_PREFIX_DIR="--define-variable=prefix=../thirdparty/32"
-  fi
-
+    OPTIONS="--arch=x86_64 --target-os=mingw64 --enable-shared --disable-static --build-suffix=-lav --disable-muxers --disable-encoders --pkg-config=pkg-config"
   sh configure ${OPTIONS}
 )
 
