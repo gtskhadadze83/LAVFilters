@@ -54,8 +54,7 @@ configure() (
     --disable-filters               \
     --enable-filter=scale,yadif,w3fdif \
     --disable-protocol=async,cache,concat,httpproxy,icecast,md5,subfile \
-    --disable-muxers                \
-    --enable-muxer=spdif            \
+    --disable-muxers                \    
     --disable-cuda                  \
     --disable-cuda-llvm             \
     --disable-cuvid                 \
@@ -69,6 +68,7 @@ configure() (
     --disable-debug                 \
     --disable-doc                   \
     --disable-schannel              \
+    --enable-nonfree                \
     --build-suffix=-lav             \
     --arch=${arch}"
 
@@ -77,7 +77,7 @@ configure() (
   PKG_CONFIG_PREFIX_DIR=""
   if [ "${arch}" == "x86_64" ]; then
     export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:../thirdparty/64/lib/pkgconfig/"
-    OPTIONS="${OPTIONS} --enable-cross-compile --cross-prefix=${cross_prefix} --target-os=mingw64 --pkg-config=pkg-config"
+    OPTIONS="${OPTIONS} --enable-cross-compile --cross-prefix=${cross_prefix} --target-os=mingw64 --pkg-config=pkg-config --host=x86_64-w64-mingw32"
     EXTRA_CFLAGS="${EXTRA_CFLAGS} -I../thirdparty/64/include"
     EXTRA_LDFLAGS="${EXTRA_LDFLAGS} -L../thirdparty/64/lib"
     PKG_CONFIG_PREFIX_DIR="--define-variable=prefix=../thirdparty/64"
