@@ -50,7 +50,7 @@ configure() (
   PKG_CONFIG_PREFIX_DIR=""
   if [ "${arch}" == "x86_64" ]; then
     export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:../thirdparty/64/lib/pkgconfig/"
-    OPTIONS="--arch=x86_64 --cross-prefix=${cross_prefix} --target-os=mingw64 --pkg-config=pkg-config --enable-shared --disable-static --build-suffix=-lav --disable-muxers --disable-encoders"
+    OPTIONS="--arch=x86_64 --cross-prefix=x86_64-w64-mingw32- --target-os=mingw64 --pkg-config=pkg-config --enable-cross-compile --enable-shared --disable-static --build-suffix=-lav --disable-muxers --disable-encoders"
     EXTRA_CFLAGS="${EXTRA_CFLAGS} -I../thirdparty/64/include"
     EXTRA_LDFLAGS="${EXTRA_LDFLAGS} -L../thirdparty/64/lib"
     PKG_CONFIG_PREFIX_DIR="--define-variable=prefix=../thirdparty/64"
