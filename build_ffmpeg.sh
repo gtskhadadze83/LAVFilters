@@ -44,6 +44,7 @@ clean() (
   make distclean > /dev/null 2>&1
 )
 
+configure() (
   EXTRA_CFLAGS="-fno-tree-vectorize -D_WIN32_WINNT=0x0600 -DWINVER=0x0600"
   EXTRA_LDFLAGS=""
   PKG_CONFIG_PREFIX_DIR=""
