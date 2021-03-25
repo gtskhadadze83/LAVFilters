@@ -50,7 +50,7 @@ configure() (
   PKG_CONFIG_PREFIX_DIR=""
   if [ "${arch}" == "x86_64" ]; then
     export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:../thirdparty/64/lib/pkgconfig/"
-    OPTIONS="--arch=x86_64 --target-os=mingw32 --disable-runtime-cpudetect --enable-cross-compile --enable-shared --disable-static --build-suffix=-lav --disable-muxers --disable-encoders"
+    OPTIONS="--arch=x86_64 --target-os=mingw32 --cross-prefix=i686-w64-mingw32- --disable-runtime-cpudetect --enable-cross-compile --enable-shared --disable-static --build-suffix=-lav --disable-muxers --disable-encoders"
   else
     export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:../thirdparty/32/lib/pkgconfig/"
     OPTIONS="${OPTIONS} --cpu=i686"
