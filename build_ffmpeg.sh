@@ -48,7 +48,6 @@ configure() (
   OPTIONS="
     --enable-shared                 \
     --disable-static                \
-    --enable-gpl                    \
     --enable-version3               \
     --enable-w32threads             \
     --disable-demuxer=matroska      \
@@ -57,19 +56,10 @@ configure() (
     --disable-protocol=async,cache,concat,httpproxy,icecast,md5,subfile \
     --disable-muxers                \
     --enable-muxer=spdif            \
-    --disable-bsfs                  \
-    --enable-bsf=extract_extradata,vp9_superframe_split \
     --disable-cuda                  \
     --disable-cuda-llvm             \
     --disable-cuvid                 \
     --disable-nvenc                 \
-    --disable-mediafoundation       \
-    --enable-libdav1d               \
-    --enable-libspeex               \
-    --enable-libopencore-amrnb      \
-    --enable-libopencore-amrwb      \
-    --enable-avresample             \
-    --enable-avisynth               \
     --disable-avdevice              \
     --disable-postproc              \
     --disable-swresample            \
@@ -79,9 +69,6 @@ configure() (
     --disable-debug                 \
     --disable-doc                   \
     --disable-schannel              \
-    --enable-gnutls                 \
-    --enable-gmp                    \
-    --enable-libxml2                \
     --build-suffix=-lav             \
     --arch=${arch}"
 
