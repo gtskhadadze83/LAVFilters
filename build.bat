@@ -7,7 +7,7 @@ for /f "usebackq tokens=*" %%i in (`call "%ProgramFiles(x86)%\Microsoft Visual S
 set "VSCMD_START_DIR=%CD%"
 call "%VSInstallDir%\Common7\Tools\VsDevCmd.bat" -no_logo > NUL
 
-bash build_ffmpeg_msvc.sh x64 || EXIT /B 1
+bash build_ffmpeg.sh x64 || EXIT /B 1
 MSBuild.exe LAVFilters.sln /nologo /m /t:Rebuild /property:Configuration=Release /property:Platform=x64
 IF ERRORLEVEL 1 EXIT /B 1
 
