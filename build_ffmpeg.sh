@@ -75,7 +75,6 @@ configure() (
     --disable-doc                   \
     --disable-schannel              \
     --enable-gmp                    \
-    --enable-libxml2               \
 	--enable-zlib 					\
     --build-suffix=-lav             \
     --arch=${arch}"
