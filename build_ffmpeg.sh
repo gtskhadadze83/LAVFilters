@@ -3,7 +3,7 @@
 arch=x86
 archdir=Win32
 clean_build=true
-cross_prefix=
+cross_prefix=i686-w64-mingw32-
 
 for opt in "$@"
 do
@@ -13,7 +13,7 @@ do
     x64 | amd64)
             arch=x86_64
             archdir=x64
-            cross_prefix=i686-w64-mingw32-
+            cross_prefix=x86_64-w64-mingw32-
             ;;
     quick)
             clean_build=false
@@ -45,11 +45,60 @@ clean() (
 )
 
 configure() (
+  OPTIONS="
+    --enable-shared                 \
+    --disable-static                \
+    --enable-nonfree                \
+	--enable-gpl					\
+    --enable-version3               \
+    --enable-w32threads             \
+    --disable-filters               \
+    --enable-filter=scale,yadif,w3fdif \
+    --disable-protocol=async,cache,concat,httpproxy,icecast,md5,subfile \
+    --disable-muxers                \
+    --enable-muxer=spdif            \
+    --disable-bsfs                  \
+    --enable-bsf=extract_extradata,vp9_superframe_split \
+    --disable-cuda                  \
+    --disable-cuda-llvm             \
+    --disable-cuvid                 \
+    --disable-nvenc                 \
+	--disable-mediafoundation       \
+    --enable-avresample             \
+	--enable-libdav1d               \
+	--disable-postproc              \
+    --disable-avdevice              \
+    --disable-swresample            \
+    --disable-encoders              \
+    --disable-devices               \
+    --disable-programs              \
+    --disable-debug                 \
+    --disable-doc                   \
+    --disable-schannel              \
+    --enable-gmp                    \
+    --enable-libxml2               \
+	--enable-zlib 					\
+    --build-suffix=-lav             \
+    --arch=${arch}"
+
   EXTRA_CFLAGS="-fno-tree-vectorize -D_WIN32_WINNT=0x0600 -DWINVER=0x0600"
   EXTRA_LDFLAGS=""
   PKG_CONFIG_PREFIX_DIR=""
-  OPTIONS="--arch=x86 --target-os=mingw32 --enable-shared --disable-static --build-suffix=-lav --disable-muxers --disable-encoders --pkg-config=pkg-config"
-  sh configure ${OPTIONS}
+  if [ "${arch}" == "x86_64" ]; then
+    export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:../thirdparty/64/lib/pkgconfig/"
+    OPTIONS="${OPTIONS} --enable-cross-compile --cross-prefix=${cross_prefix} --target-os=mingw32"
+    EXTRA_CFLAGS="${EXTRA_CFLAGS} -I../thirdparty/64/include"
+    EXTRA_LDFLAGS="${EXTRA_LDFLAGS} -L../thirdparty/64/lib"
+    PKG_CONFIG_PREFIX_DIR="--define-variable=prefix=../thirdparty/64"
+  else
+    export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:../thirdparty/32/lib/pkgconfig/"
+    OPTIONS="${OPTIONS} --enable-cross-compile --cross-prefix=${cross_prefix} --target-os=mingw32 --pkg-config=pkg-config"
+    EXTRA_CFLAGS="${EXTRA_CFLAGS} -I../thirdparty/32/include -mmmx -msse -msse2 -mfpmath=sse -mstackrealign"
+    EXTRA_LDFLAGS="${EXTRA_LDFLAGS} -L../thirdparty/32/lib"
+    PKG_CONFIG_PREFIX_DIR="--define-variable=prefix=../thirdparty/32"
+  fi
+
+  sh configure --extra-ldflags="${EXTRA_LDFLAGS}" --extra-cflags="${EXTRA_CFLAGS}" --pkg-config-flags="--static ${PKG_CONFIG_PREFIX_DIR}" ${OPTIONS}
 )
 
 build() (
