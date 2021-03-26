@@ -93,7 +93,7 @@ configure() (
     EXTRA_LDFLAGS="${EXTRA_LDFLAGS} -NODEFAULTLIB:libcmt"
   fi
 
-  sh configure --toolchain=msvc --x86asmexe=yasm --extra-cflags="${EXTRA_CFLAGS}" --extra-ldflags="${EXTRA_LDFLAGS}" ${OPTIONS}
+  sh configure --toolchain=msvc --x86asmexe=yasm --enable-cross-compile --extra-cflags="${EXTRA_CFLAGS}" --extra-ldflags="${EXTRA_LDFLAGS}" ${OPTIONS}
 )
 
 build() (
