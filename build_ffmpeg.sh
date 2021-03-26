@@ -13,7 +13,7 @@ do
     x64 | amd64)
             arch=x86_64
             archdir=x64
-            cross_prefix=x86_64-w64-mingw32-
+            cross_prefix=
             ;;
     quick)
             clean_build=false
