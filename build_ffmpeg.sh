@@ -13,7 +13,7 @@ do
     x64 | amd64)
             arch=x86_64
             archdir=x64
-            cross_prefix=
+            cross_prefix=x86_64-w64-mingw32-
             ;;
     quick)
             clean_build=false
@@ -83,13 +83,13 @@ configure() (
   PKG_CONFIG_PREFIX_DIR=""
   if [ "${arch}" == "x86_64" ]; then
     export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:../thirdparty/64/lib/pkgconfig/"
-    OPTIONS="${OPTIONS} --enable-cross-compile --target-os=mingw32"
+    OPTIONS="${OPTIONS} --enable-cross-compile --cross-prefix=${cross_prefix} --target-os=mingw32 --pkg-config=pkg-config"
     EXTRA_CFLAGS="${EXTRA_CFLAGS} -I../thirdparty/64/include"
     EXTRA_LDFLAGS="${EXTRA_LDFLAGS} -L../thirdparty/64/lib"
     PKG_CONFIG_PREFIX_DIR="--define-variable=prefix=../thirdparty/64"
   else
     export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:../thirdparty/32/lib/pkgconfig/"
-    OPTIONS="${OPTIONS} --cpu=i686 --enable-cross-compile --cross-prefix=${cross_prefix} --target-os=mingw32 --pkg-config=pkg-config "
+    OPTIONS="${OPTIONS} --cpu=i686 --enable-cross-compile --cross-prefix=${cross_prefix} --target-os=mingw32 --pkg-config=pkg-config"
     EXTRA_CFLAGS="${EXTRA_CFLAGS} -I../thirdparty/32/include -mmmx -msse -msse2 -mfpmath=sse -mstackrealign"
     EXTRA_LDFLAGS="${EXTRA_LDFLAGS} -L../thirdparty/32/lib"
     PKG_CONFIG_PREFIX_DIR="--define-variable=prefix=../thirdparty/32"
